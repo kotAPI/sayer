@@ -1,0 +1,17 @@
+.hold {
+    color: #cea21f;
+    padding: 4px 10px;
+    font-size: 0.8em;
+    border-radius: 8px;
+    border: 1px solid #ffc107;
+    background: #fff7df;
+}
+
+.sell {
+    color: #1fce4e;
+    padding: 4px 10px;
+    font-size: 0.8em;
+    border-radius: 8px;
+    border: 1px solid #019c2b;
+    background: #d1fddd;
+}
