@@ -30,21 +30,20 @@ function updater() {
 
             //2,3
             let costBought = children[2].textContent
-            let currentCost = children[3].textContent
+            let currentCost = children[3].textContent;
 
 
-            let margin = (currentCost - costBought)
+
+            let profitMargin = getNetProfitForEquity(currentCost,costBought) 
 
             let dataElem = dataElemNode.querySelector(".holding-state")
             let span = dataElem.querySelector('span');
-            span.textContent = margin > THRESHOLD ? 'SELL' : 'HOLD'
+            span.textContent = profitMargin 
 
-            if (margin > THRESHOLD) {
-                span.classList.add("sell")
-                span.classList.remove("hold")
+            if (profitMargin > THRESHOLD) {
+                dataElemNode.classList.add("sell")
             } else {
-                span.classList.add("hold")
-                span.classList.remove("sell")
+                dataElemNode.classList.remove("sell")
             }
 
         }
@@ -54,7 +53,7 @@ function updater() {
         var elemToAppend = document.createElement('th');
         elemToAppend.classList.add("sayer-head")
         elemToAppend.textContent = 'Sayer';
-        var elemToAppendTo = tableElement.querySelector('.day-change-margin').parentNode;
+        var elemToAppendTo = tableElement.querySelector('.day-change-percent').parentNode;
         elemToAppendTo.appendChild(elemToAppend)
         let dataElems = tableElement.querySelector('tbody').children;
         for (var i = 0; i < dataElems.length; i++) {
@@ -66,19 +65,18 @@ function updater() {
             let currentCost = children[3].textContent
 
 
-            let margin = (currentCost - costBought)
+            let profitMargin = getNetProfitForEquity(currentCost,costBought) 
 
             // customize data element
             let dataElem = document.createElement("td")
             dataElem.classList.add("holding-state")
             let span = document.createElement('span');
-            span.textContent = margin > THRESHOLD ? 'SELL' : 'HOLD'
+            span.textContent = profitMargin 
 
-            if (margin > THRESHOLD) {
+            if (profitMargin > THRESHOLD) {
                 span.classList.add("sell")
-                span.classList.remove("hold")
+
             } else {
-                span.classList.add("hold")
                 span.classList.remove("sell")
             }
 
@@ -90,4 +88,17 @@ function updater() {
         }
     }
 
+}
+
+
+function getNetProfitForEquity(sellPrice,buyPrice,quantity){
+    let diff = sellPrice - buyPrice
+    let STAMP_CHARGE_RATE = 13.5;
+
+    let stampCharges = STAMP_CHARGE_RATE + (18/100)*STAMP_CHARGE_RATE;
+
+
+
+
+    return diff.toFixed(2)
 }
